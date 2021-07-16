@@ -1,0 +1,91 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+<title>Video player</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="icon" href="https://lb123658.github.io/unkrafted/favicon.ico" type="image/ico"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<style>
+* {
+font-family: 'Press Start 2P', cursive;
+}
+body {
+background: #282828;
+user-select: none;
+-webkit-user-select: none;
+}
+#cointainer {
+position: absolute;
+top: 0px;
+left: 0px;
+width: 100%;
+}
+#vid {
+width: 100%;
+position: absolute;
+top: 0px;
+left: 0px;
+}
+#play {
+position: absolute;
+bottom: 0px;
+left: 5px;
+}
+#pause {
+position: absolute;
+bottom: 0px;
+left: 55px;
+}
+.control {
+z-index: 1;
+width: 40px;
+height: 40px;
+border: none;
+background: grey;
+margin-top: -40px;
+border-radius: 15px;
+cursor: pointer;
+transition: border-radius 0.5s;
+opacity: 0.8;
+}
+.control:hover {
+border-radius: 5px;
+}
+.control:focus {
+background: red;
+}
+</style>
+</head>
+<body onresize="divHeight()" onload="divHeight()"> 
+
+<div id="container">
+<video id="vid">
+  <source src="https://lb123658.github.io/unkrafted/video/unkrafted.mp4" type="video/mp4">
+  Loading video...
+</video>
+<button id="play" class="control" onclick="playVid()"><span class="material-icons">play_circle</span></button>
+<button id="pause" class="control" onclick="pauseVid()"><span class="material-icons">pause</span></button>
+</div>
+
+<script>
+var vid = document.getElementById("vid");
+var div = document.getElementById("container");
+var go = document.getElementById("play");
+var stop = document.getElementById("pause");
+
+function playVid() {
+vid.play();
+}
+function pauseVid() {
+vid.pause();
+}
+//change div height based on video
+function divHeight() {
+var pos = window.innerWidth * 0.56;
+go.style.top = pos + "px";
+stop.style.top = pos + "px";
+}
+</script>
+</body> 
+</html>
