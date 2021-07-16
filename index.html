@@ -78,11 +78,11 @@ margin-top: -50px;
 }
 </style>
 </head>
-<body onresize="divHeight()" onload="divHeight(); hide()" onmouseover="show()" onmouseout="hide()"> 
+<body onresize="divHeight()" onload="divHeight(); hide(); setVideo()" onmouseover="show()" onmouseout="hide()"> 
 <noscript>Turn on JavaScript to watch this video.</noscript>
 <div id="container">
 <video id="vid">
-  <source id="source" src="" type="video/mp4">
+  <source id="source" src="#" type="video/mp4">
   Loading video...
 </video>
 <button id="play" class="control" onclick="playVid()" onmouseover="show()"><span class="material-icons">play_circle</span></button>
@@ -128,7 +128,9 @@ vol.style.display = "none";
 quiet.style.display = "none";
 }
 //load video
+function setVideo() {
 document.getElementById("source").src = location.search.split("src=")[1];
+}
 </script>
 </body> 
 </html>
