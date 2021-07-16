@@ -31,22 +31,22 @@ background: black;
 }
 #play {
 position: absolute;
-bottom: 5px;
+top: 5px;
 left: 5px;
 }
 #pause {
 position: absolute;
-bottom: 5px;
+top: 5px;
 left: 55px;
 }
 #vol-up {
 position: absolute;
-bottom: 5px;
+top: 5px;
 left: 105px;
 }
 #vol-mute {
 position: absolute;
-bottom: 5px;
+top: 5px;
 left: 155px;
 }
 .control {
@@ -55,7 +55,6 @@ width: 40px;
 height: 40px;
 border: none;
 background: grey;
-margin-top: -40px;
 border-radius: 15px;
 cursor: pointer;
 transition: border-radius 0.5s;
@@ -68,22 +67,31 @@ border-radius: 5px;
 .control:focus {
 background: red;
 }
+#main-play {
+position: absolute;
+width: 100px;
+height: 100px;
+top: 50%;
+left: 50%;
+margin-left: -50px;
+margin-top: -50px;
+}
 </style>
 </head>
-<body onresize="divHeight()" onload="divHeight()"> 
-  <noscript>Turn on JavaScript to use this video player</noscript>
+<body onresize="divHeight()" onload="divHeight(); hide()" onmouseover="show()" onmouseout="hide()"> 
+<noscript>Turn on JavaScript to watch this video.</noscript>
 <div id="container">
 <video id="vid">
   <source id="source" src="" type="video/mp4">
   Loading video...
 </video>
-<button id="play" class="control" onclick="playVid()"><span class="material-icons">play_circle</span></button>
-<button id="pause" class="control" onclick="pauseVid()"><span class="material-icons">pause</span></button>
-<button id="vol-up" class="control" onclick="fullVol()"><span class="material-icons">volume_up</span></button>
-<button id="vol-mute" class="control" onclick="lowVol()"><span class="material-icons">volume_off</span></button>
+<button id="play" class="control" onclick="playVid()" onmouseover="show()"><span class="material-icons">play_circle</span></button>
+<button id="pause" class="control" onclick="pauseVid()" onmouseover="show()"><span class="material-icons">pause</span></button>
+<button id="vol-up" class="control" onclick="fullVol()" onmouseover="show()"><span class="material-icons">volume_up</span></button>
+<button id="vol-mute" class="control" onclick="lowVol()" onmouseover="show()"><span class="material-icons">volume_off</span></button>
 
+<button id="main-play" class="control" onclick="playVid();"><span class="material-icons" style="font-size:60px;">play_circle</span></button>
 </div>
-
 <script>
 var vid = document.getElementById("vid");
 var div = document.getElementById("container");
@@ -91,9 +99,11 @@ var go = document.getElementById("play");
 var stop = document.getElementById("pause");
 var vol = document.getElementById("vol-up");
 var quiet = document.getElementById("vol-mute");
+var main = document.getElementById("main-play");
 
 function playVid() {
 vid.play();
+main.style.display = "none";
 }
 function pauseVid() {
 vid.pause();
@@ -104,13 +114,18 @@ vid.volume = 1.0;
 function lowVol() {
 vid.volume = 0.0;
 }
-//change div height based on video
-function divHeight() {
-var pos = window.innerWidth * 0.56;
-go.style.top = pos + "px";
-stop.style.top = pos + "px";
-vol.style.top = pos + "px";
-quiet.style.top = pos + "px";
+
+function show() {
+go.style.display = "block";
+stop.style.display = "block";
+vol.style.display = "block";
+quiet.style.display = "block";
+}
+function hide() {
+go.style.display = "none";
+stop.style.display = "none";
+vol.style.display = "none";
+quiet.style.display = "none";
 }
 //load video
 document.getElementById("source").src = location.search.split("src=")[1];
