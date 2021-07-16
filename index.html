@@ -20,22 +20,34 @@ position: absolute;
 top: 0px;
 left: 0px;
 width: 100%;
+background: black;
 }
 #vid {
 width: 100%;
 position: absolute;
 top: 0px;
 left: 0px;
+background: black;
 }
 #play {
 position: absolute;
-bottom: 0px;
+bottom: 5px;
 left: 5px;
 }
 #pause {
 position: absolute;
-bottom: 0px;
+bottom: 5px;
 left: 55px;
+}
+#vol-up {
+position: absolute;
+bottom: 5px;
+left: 105px;
+}
+#vol-mute {
+position: absolute;
+bottom: 5px;
+left: 155px;
 }
 .control {
 z-index: 1;
@@ -48,6 +60,7 @@ border-radius: 15px;
 cursor: pointer;
 transition: border-radius 0.5s;
 opacity: 0.8;
+color: white;
 }
 .control:hover {
 border-radius: 5px;
@@ -58,14 +71,17 @@ background: red;
 </style>
 </head>
 <body onresize="divHeight()" onload="divHeight()"> 
-
+  <noscript>Turn on JavaScript to use this video player</noscript>
 <div id="container">
 <video id="vid">
-  <source src="https://lb123658.github.io/unkrafted/video/unkrafted.mp4" type="video/mp4">
+  <source id="source" src="https://lb123658.github.io/unkrafted/video/unkrafted.mp4" type="video/mp4">
   Loading video...
 </video>
 <button id="play" class="control" onclick="playVid()"><span class="material-icons">play_circle</span></button>
 <button id="pause" class="control" onclick="pauseVid()"><span class="material-icons">pause</span></button>
+<button id="vol-up" class="control" onclick="fullVol()"><span class="material-icons">volume_up</span></button>
+<button id="vol-mute" class="control" onclick="lowVol()"><span class="material-icons">volume_off</span></button>
+
 </div>
 
 <script>
@@ -73,6 +89,8 @@ var vid = document.getElementById("vid");
 var div = document.getElementById("container");
 var go = document.getElementById("play");
 var stop = document.getElementById("pause");
+var vol = document.getElementById("vol-up");
+var quiet = document.getElementById("vol-mute");
 
 function playVid() {
 vid.play();
@@ -80,12 +98,22 @@ vid.play();
 function pauseVid() {
 vid.pause();
 }
+function fullVol() {
+vid.volume = 1.0;
+}
+function lowVol() {
+vid.volume = 0.0;
+}
 //change div height based on video
 function divHeight() {
 var pos = window.innerWidth * 0.56;
 go.style.top = pos + "px";
 stop.style.top = pos + "px";
+vol.style.top = pos + "px";
+quiet.style.top = pos + "px";
 }
+//load video
+document.getElementById("source").src = location.search.split("src=")[1];
 </script>
 </body> 
 </html>
